@@ -53,10 +53,9 @@ languages.get('/', (req, res) => {
 // Random:
 languages.get('/random', async (req, res) => {
     try {
-        const languageAmount = await Language.countDocuments()
-        const random = Math.floor(Math.random() * languageAmount)
-        const foundLanguage = await Language.findOne().skip(random)
-        res.json(foundLanguage)
+        const languages = await Language.find()
+        const random = Math.floor(Math.random() * languages.length)
+        res.json(languages[random])
     } catch(err) {
         console.log(err)
     }
